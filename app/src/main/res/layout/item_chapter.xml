@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/item_chapter"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mat_div_comic"
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        android:id="@+id/chapter_txt"
+        android:text="chapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/chapter_txt"
+        app:layout_constraintBottom_toTopOf="@+id/mat_div_comic"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/chapter_num"
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_marginTop="10dp"
+        android:id="@+id/mat_div_comic"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/chapter_txt"
+        android:layout_height="wrap_content"></com.google.android.material.divider.MaterialDivider>
+</androidx.constraintlayout.widget.ConstraintLayout>

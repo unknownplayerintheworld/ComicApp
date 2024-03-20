@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.AuthorActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/item_header_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/btnback"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_arrow_back_main_color"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"></ImageButton>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/trans_title"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="nhóm dịch 1"
+        android:textColor="@color/main_color"
+        android:layout_height="wrap_content"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toBottomOf="@+id/item_header_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="5dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/img_trans"
+        android:src="@drawable/img_4"
+        tools:ignore="MissingConstraints"></com.google.android.material.imageview.ShapeableImageView>
+    <TextView
+        android:id="@+id/trans_tv"
+        android:layout_width="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Nhóm dịch 1"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/img_trans"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"></TextView>
+    <TextView
+        android:id="@+id/trans_desc"
+        android:layout_width="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Trang chính thức của nhóm dịch 1"
+        android:textSize="15dp"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@+id/trans_tv"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"></TextView>
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/id_mat_div_trans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/trans_desc" />
+
+    <TextView
+        android:id="@+id/tv_comic_trans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="8dp"
+        android:text="Truyện"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_mat_div_trans"></TextView>
+    <TextView
+        android:id="@+id/txt_noComics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_comic_trans"
+        android:text="Không có chuyện nào"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/rcv_trans_comic_owner"
+        android:nestedScrollingEnabled="true"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_comic_trans"
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

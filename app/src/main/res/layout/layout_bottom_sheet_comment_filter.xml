@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_confirm_add_fav_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    >
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/newest_comment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mới nhất"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/most_react_comment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nổi bật"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:checked="false" />
+    </RadioGroup>
+
+
+</LinearLayout>

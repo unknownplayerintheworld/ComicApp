@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="comicViewModel"
+            type="hung.deptrai.comicapp.viewmodel.ComicViewModel" />
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.MainActivity">
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_above="@id/bngv"
+        android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+
+        android:layout_height="70dp"
+        android:background="@color/main_color"
+        app:itemBackground="@color/main_color"
+        app:itemTextColor="@color/color_menu_nav"
+        app:itemIconTint="@color/color_menu_nav"
+        android:id="@+id/bngv"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_navigation"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
+</layout>
