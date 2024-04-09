@@ -606,9 +606,11 @@ public class ComicActivity extends AppCompatActivity implements iUpdateFavourite
                 if (isfav) {
                     // Set the favourite button icon to red heart
                     favourite_button.setImageResource(R.drawable.ic_fav);
+                    isFAV = true;
                 } else {
                     // Set the favourite button icon to grey heart
                     favourite_button.setImageResource(R.drawable.ic_unfav);
+                    isFAV = false;
                 }
             }
         });

@@ -69,6 +69,7 @@ public class BottomSheetCommentFilter extends BottomSheetDialogFragment {
                         listener.onFilterStatus(false);
                     }
                 }
+                dismiss();
             }
         });
         return bts;

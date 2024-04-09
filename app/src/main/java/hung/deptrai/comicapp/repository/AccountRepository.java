@@ -4,10 +4,12 @@ import android.app.Application;
 import android.os.Build;
 import android.os.ext.SdkExtensions;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 
 import hung.deptrai.comicapp.Utils.MessageStatusHTTP;
 import hung.deptrai.comicapp.Utils.Status;
@@ -23,6 +25,8 @@ public class AccountRepository {
     private Application application;
     private MutableLiveData<Integer> loginstatus = new MutableLiveData<>();
     private MutableLiveData<Integer> signupstatus = new MutableLiveData<>();
+    private MutableLiveData<Boolean> updateImageStatus = new MutableLiveData<>();
+
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<String> id = new MutableLiveData<>();
 
@@ -129,6 +133,34 @@ public class AccountRepository {
                     });
         }
         return signupstatus;
+    }
+    public MutableLiveData<Boolean> getUpdateImageStatus(HashMap<String,String> hashMap){
+        AccountService.accountService.updateUserIMage(hashMap).enqueue(new Callback<DataJSON<Boolean>>() {
+            @Override
+            public void onResponse(Call<DataJSON<Boolean>> call, Response<DataJSON<Boolean>> response) {
+                DataJSON dataJSON = response.body();
+                if(response.isSuccessful()){
+                    if(dataJSON!=null){
+                        if(dataJSON.isStatus()){
+                            updateImageStatus.setValue(true);
+                        }
+                        else{
+                            updateImageStatus.setValue(false);
+                        }
+                    }
+                }
+                else if(response.code() == HttpURLConnection.HTTP_NOT_IMPLEMENTED){
+                    Toast.makeText(application, MessageStatusHTTP.notImplemented,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DataJSON<Boolean>> call, Throwable t) {
+                Log.e("ERROR", this.getClass().getName()+"onClickLogin()->onFailure: "+t.getMessage());
+                message.setValue("No internet connection");
+            }
+        });
+        return updateImageStatus;
     }
     public MutableLiveData<String> getMessage() {
         return message;

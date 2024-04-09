@@ -7,6 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.HashMap;
+
 import hung.deptrai.comicapp.Utils.Status;
 import hung.deptrai.comicapp.Utils.ValidatorUtil;
 import hung.deptrai.comicapp.model.Account;
@@ -71,5 +73,8 @@ public class SignUpViewModel extends AndroidViewModel {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+    public LiveData<Boolean> getUpdateUserImage(HashMap hashMap){
+        return accountRepository.getUpdateImageStatus(hashMap);
     }
 }

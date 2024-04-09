@@ -126,12 +126,12 @@ public class HistoryActivity extends AppCompatActivity {
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("username", Tmp.current_username);
         comicViewModel.getComicHistory(hashMap).observe(this,comics -> {
+            comicList = new ArrayList<>();
             for (int i = 0; i < comics.size(); i++) {
                 comicList.add(new Comic(comics.get(i).getId(),comics.get(i).getComicName(),comics.get(i).getLinkPicture(),comics.get(i).getViews(),comics.get(i).getCreated_at(),comics.get(i).getUpdated_at(),comics.get(i).getViews_in_month(),comics.get(i).getViews_in_week()));
             }
-            s1 = true;
-            checkAndUpdate();
-            comicViewModel.getComicHistory(hashMap).removeObservers(this);
+            updateUI();
+//            comicViewModel.getComicHistory(hashMap).removeObservers(this);
         });
     }
     public void checkAndUpdate(){
@@ -166,12 +166,12 @@ public class HistoryActivity extends AppCompatActivity {
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("username", Tmp.current_username);
         chapterViewModel.getChapterHistory(hashMap).observe(this,list -> {
+            chapterList = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 chapterList.add(new Chapter(list.get(i).getChapterID(),list.get(i).getChapter_pos(),list.get(i).getComicIDfk(),list.get(i).getUpdated_at()));
             }
-            s2 = true;
-            checkAndUpdate();
-            chapterViewModel.getChapterHistory(hashMap).removeObservers(this);
+            updateUI();
+//            chapterViewModel.getChapterHistory(hashMap).removeObservers(this);
         });
     }
     public void getListAuthor(){
@@ -179,12 +179,12 @@ public class HistoryActivity extends AppCompatActivity {
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("username", Tmp.current_username);
         authorViewModel.getAuthorHistory(hashMap).observe(this,list -> {
+            authorList = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 authorList.add(new Author(list.get(i).getId(),list.get(i).getAuthor_name(),list.get(i).getDescription(),list.get(i).getLink_picture_author()));
             }
-            s3 = true;
-            checkAndUpdate();
-            authorViewModel.getAuthorHistory(hashMap).removeObservers(this);
+            updateUI();
+//            authorViewModel.getAuthorHistory(hashMap).removeObservers(this);
         });
     }
     public void getHistoryID(){
@@ -193,17 +193,25 @@ public class HistoryActivity extends AppCompatActivity {
         hashMap.put("username", Tmp.current_username);
         historyViewModel.getHistoryID(hashMap).observe(this,histories -> {
             historyList = histories;
-            historyViewModel.getHistoryID(hashMap).removeObservers(this);
+//            historyViewModel.getHistoryID(hashMap).removeObservers(this);
         });
     }
     @Override
     protected void onStart() {
         super.onStart();
+//        getListAuthor();
+//        getListComic();
+//        getListChapter();
+//        getHistoryID();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+//        getListAuthor();
+//        getListComic();
+//        getListChapter();
+//        getHistoryID();
     }
 
     @Override
@@ -219,6 +227,19 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        if (comicList != null) {
+            comicList.clear();
+        }
+        if (chapterList != null) {
+            chapterList.clear();
+        }
+        if (authorList != null) {
+            authorList.clear();
+        }
+        updateUI();
+        getListAuthor();
+        getListComic();
+        getListChapter();
     }
 
     @Override

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "935784583265",
+    "project_id": "image-5b3a5",
+    "storage_bucket": "image-5b3a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935784583265:android:5a35cf37967f47ce96da20",
+        "android_client_info": {
+          "package_name": "hung.deptrai.comicapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtn1ZyEFGLGJDt95albVh4nTZ-3NM2rvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

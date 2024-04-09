@@ -3,22 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Profile"
-        android:textColor="@color/black"
         android:textSize="45sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <SeekBar
+        android:id="@+id/seekbar_translate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:max="1"
+        android:progress="0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"
+        >
+    </SeekBar>
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -46,7 +53,6 @@
             android:layout_marginTop="50dp"
             android:layout_toEndOf="@+id/profile_image"
             android:text="Username"
-            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton

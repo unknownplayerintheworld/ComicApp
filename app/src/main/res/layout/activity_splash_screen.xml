@@ -4,22 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.SplashScreenActivity">
-
     <ImageView
         android:id="@+id/logo_comic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginBottom="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:src="@drawable/logo_signin"></ImageView>
-    <ImageView
-        android:id="@+id/imageViewDots"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_dot"
-        android:layout_below="@+id/logo_comic"
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_alignParentBottom="true"
+        android:id="@+id/progressBar_horizontal"
+        android:layout_marginBottom="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-
-
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"></com.google.android.material.progressindicator.LinearProgressIndicator>
 </RelativeLayout>

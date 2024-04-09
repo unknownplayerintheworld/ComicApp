@@ -2,6 +2,7 @@ package hung.deptrai.comicapp.views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -119,5 +120,16 @@ public class MainActivity extends AppCompatActivity {
         Tmp.current_username = "";
         startActivity(intent);
         finishAffinity();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if ((newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) ==
+                Configuration.UI_MODE_NIGHT_YES) {
+            // Xử lý logic khi chuyển sang chế độ tối
+        } else {
+            // Xử lý logic khi chuyển sang chế độ sáng
+        }
     }
 }

@@ -58,8 +58,7 @@ public class AuthorActivity extends AppCompatActivity {
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuthorActivity.this,MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

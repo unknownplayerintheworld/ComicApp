@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -76,6 +78,9 @@ public class ReadingActivity extends AppCompatActivity {
     private ChapterViewModel chapterViewModel;
     private HistoryViewModel historyViewModel;
     private String HistoryID = "";
+
+    private static final String PREFS_NAME = "MyPrefs";
+    private static final String LAST_UPDATE_TIME_KEY = "lastUpdateTime";
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -157,9 +162,36 @@ public class ReadingActivity extends AppCompatActivity {
     }
 
     public void update() {
-        updateViews(getComicID());
+        updateStateIfNeeded(getComicID());
         getHistoryID();
     }
+
+    private void updateStateIfNeeded(String comicID) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String lastUpdateTimeKey = LAST_UPDATE_TIME_KEY + "_" + comicID;
+        long lastUpdateTime = prefs.getLong(lastUpdateTimeKey, 0);
+
+        // Lấy thời gian hiện tại
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+
+        // Kiểm tra thời gian giữa lần cập nhật gần nhất và thời gian hiện tại
+        long timeSinceLastUpdate = currentTime - lastUpdateTime;
+        long updateInterval = 15 * 60 * 1000; // 15 phút * 60 giây/phút * 1000 ms/giây
+
+        if (timeSinceLastUpdate >= updateInterval) {
+            // Thực hiện cập nhật trạng thái
+            updateViews(comicID);
+
+            // Lưu thời gian cập nhật mới
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong(lastUpdateTimeKey, currentTime);
+            editor.apply();
+        } else {
+            // Thời gian giữa các lần cập nhật chưa đủ lớn, từ chối cập nhật
+            Toast.makeText(this, "Please wait before updating again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void upsertHistory(String chapterID, String historyID, String comicID, String currentUsername) {
         HashMap<String,String> hashMap = new HashMap<>();
@@ -269,8 +301,7 @@ public class ReadingActivity extends AppCompatActivity {
     }
 
     private void openBottomSheetAddToFav() {
-        BottomSheetAddToFavourite bts = new BottomSheetAddToFavourite();
-        bts.show(getSupportFragmentManager(),bts.getTag());
+        finish();
     }
 
 

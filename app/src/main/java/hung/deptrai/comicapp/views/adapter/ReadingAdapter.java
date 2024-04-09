@@ -29,11 +29,11 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ReadingV
     @Override
     public ReadingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_chapter_comic,parent,false);
-        ImageView imageView = view.findViewById(R.id.img_chapter);
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-        ));
+//        ImageView imageView = view.findViewById(R.id.img_chapter);
+//        imageView.setLayoutParams(new ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.MATCH_PARENT
+//        ));
         return new ReadingViewHolder(view);
     }
 

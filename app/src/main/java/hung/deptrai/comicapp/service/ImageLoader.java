@@ -16,7 +16,6 @@ public class ImageLoader {
         Glide.with(view)
                 .load(url)
                 .apply(requestOptions)
-                .centerCrop()
                 .into(imageView);
     }
 }

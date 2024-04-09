@@ -418,7 +418,7 @@ public class CommentRepository {
                     Toast.makeText(application, MessageStatusHTTP.notImplemented,Toast.LENGTH_SHORT).show();
                 }
                 else if(response.code() == HttpURLConnection.HTTP_NOT_FOUND){
-                    Toast.makeText(application, "No record",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(application, "Cannot like also dislike",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -449,7 +449,7 @@ public class CommentRepository {
                     Toast.makeText(application, MessageStatusHTTP.notImplemented,Toast.LENGTH_SHORT).show();
                 }
                 else if(response.code() == HttpURLConnection.HTTP_NOT_FOUND){
-                    Toast.makeText(application, "No record",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(application, "Cannot like also dislike",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".views.ComicApplication"
         android:screenOrientation="portrait"
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
@@ -31,6 +33,7 @@
         <activity
             android:name=".views.MainActivity"
             android:windowSoftInputMode="adjustPan"
+            android:configChanges="uiMode"
             android:exported="true">
         </activity>
         <activity android:name=".views.ListChapterActivity"

@@ -53,7 +53,6 @@
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:text="nhóm dịch 1"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"></TextView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -155,9 +154,9 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_4"
-                app:layout_constraintTop_toBottomOf="@+id/layout_btn"
                 app:layout_constraintBottom_toTopOf="@+id/material_divider_comic"
-                tools:layout_editor_absoluteX="-16dp"></ImageView>
+                app:layout_constraintTop_toBottomOf="@+id/layout_btn"
+                tools:layout_editor_absoluteX="-59dp"></ImageView>
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_marginTop="10dp"

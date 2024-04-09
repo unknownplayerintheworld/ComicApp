@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -40,6 +42,7 @@ public class ChildCommentActivity extends AppCompatActivity {
     private List<Comment> comments;
     private List<Account> accounts;
     private TextInputEditText commentWritting_reply;
+    private ShapeableImageView user_image_parent;
     private Snackbar snackbar,snackbar2;
     private List<Integer> accountIDList,commentIDList,parrentAccountIDList,parent_commentIDList;
     private List<Boolean> booleanList,parent_booleanList;
@@ -61,6 +64,7 @@ public class ChildCommentActivity extends AppCompatActivity {
         snackbar2 = Snackbar.make(view,"Thất Bại",BaseTransientBottomBar.LENGTH_SHORT);
 
         //UI components
+        user_image_parent = findViewById(R.id.user_image_parent);
         commentWritting_reply = findViewById(R.id.comment_reply_txt);
         user_name_cmt_parent = findViewById(R.id.user_name_cmt_parent);
         comment_time_parent = findViewById(R.id.comment_time_parent);
@@ -147,6 +151,7 @@ public class ChildCommentActivity extends AppCompatActivity {
         hashmap.put("commentID",getParentCommentID());
         commentViewModel.getAccountByCommentID(hashmap).observe(this,accountList -> {
             user_name_cmt_parent.setText(accountList.get(0).getUsername());
+            Glide.with(user_image_parent).load(accountList.get(0).getAvatarAccount()).into(user_image_parent);
         });
         commentViewModel.getCommentByCommentID(hashmap).observe(this,comments1 -> {
             parent = comments1.get(0);

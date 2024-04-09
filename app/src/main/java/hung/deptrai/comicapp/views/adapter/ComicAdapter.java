@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
@@ -88,6 +89,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
                 holder.chapter_comment_position.setVisibility(View.GONE);
             }
             else{
+                holder.chapter_comment_position.setVisibility(View.VISIBLE);
                 holder.chapter_comment_position.setText("Chapter "+chapter.getChapter_pos());
                 Log.e("Error","commentcontent:"+comment.getContent()+"|chapter"+chapter.getChapter_pos());
 
@@ -95,6 +97,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
         }
         Boolean status = false;
 //        Glide,ảnh người dùng,cần phát triển thêm
+        Glide.with(holder.user_image).load(account.getAvatarAccount()).into(holder.user_image);
         holder.username.setText(account.getUsername());
 //số comment con
         if(childCommentIDCount!=null && childCommentCount!=null) {

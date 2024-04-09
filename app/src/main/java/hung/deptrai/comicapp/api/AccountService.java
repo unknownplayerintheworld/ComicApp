@@ -25,6 +25,12 @@ public interface AccountService {
     @POST("update")
     Call<DataJSON<Account>> updateAccount(@Body HashMap<String,String> hashMap);
 
+    @POST("update/image")
+    Call<DataJSON<Boolean>> updateUserIMage(@Body HashMap hashMap);
+
+    @POST("accountid")
+    Call<DataJSON<Account>> getAccountByID(@Body HashMap hashMap);
+
 //    @POST("id")
 //    Call<DataJSON<Account>> getAccountByAccountID(@Body HashMap<String,String> hashMap);
 }

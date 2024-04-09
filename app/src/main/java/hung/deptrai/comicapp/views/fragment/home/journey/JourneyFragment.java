@@ -88,6 +88,7 @@ public class JourneyFragment extends Fragment {
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(rcv);
         ci2.attachToRecyclerView(rcv,pagerSnapHelper);
+        sec.registerAdapterDataObserver(ci2.getAdapterDataObserver());
 
         // rcv có title
         rcv2 = view.findViewById(R.id.rcv_journey2);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
@@ -59,6 +60,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         Comment comment = commentList.get(position);
         Boolean status = false;
 //        Glide,ảnh người dùng,cần phát triển thêm
+        Glide.with(holder.user_image).load(account.getAvatarAccount()).into(holder.user_image);
         holder.username.setText(account.getUsername());
 //số comment con
         if(childCommentIDCount!=null && childCommentCount!=null) {

@@ -7,6 +7,15 @@ public class Account {
     private String password;
     @SerializedName("id")
     private String id;
+    private String avatarAccount;
+
+    public String getAvatarAccount() {
+        return avatarAccount;
+    }
+
+    public void setAvatarAccount(String avatarAccount) {
+        this.avatarAccount = avatarAccount;
+    }
 
     public Account() {
     }

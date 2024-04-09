@@ -20,14 +20,24 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import hung.deptrai.comicapp.R;
+import hung.deptrai.comicapp.Utils.MessageStatusHTTP;
 import hung.deptrai.comicapp.Utils.Tmp;
+import hung.deptrai.comicapp.api.ComicService;
+import hung.deptrai.comicapp.api.CommentService;
 import hung.deptrai.comicapp.model.Comic;
+import hung.deptrai.comicapp.model.DataJSON;
 import hung.deptrai.comicapp.viewmodel.ComicViewModel;
 import hung.deptrai.comicapp.views.ComicActivity;
 import hung.deptrai.comicapp.views.Interface.iUpdateFavouriteStatus;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BottomSheetAddtoFavComic extends BottomSheetDialogFragment {
     private ConstraintLayout add,no_add;
@@ -111,23 +121,65 @@ public class BottomSheetAddtoFavComic extends BottomSheetDialogFragment {
         hashMap.put("comicID",comicID);
         hashMap.put("favouriteID",favouriteID);
         Log.e("comicID and favID",comicID + favouriteID);
-        comicViewModel.removeFromFavourite(hashMap).observe(this,favourites -> {
-            if(favourites.get(0) == true){
-                Toast.makeText(requireContext(), "Xóa khỏi yêu thích thành công", Toast.LENGTH_SHORT).show();
-                if(listener!=null){
-                    listener.onFavouriteStatus(false);
-                    Log.e("fav remove result listener:","true");
+        ComicService.comicService.removeFromFavourite(hashMap).enqueue(new Callback<DataJSON<Boolean>>() {
+            @Override
+            public void onResponse(Call<DataJSON<Boolean>> call, Response<DataJSON<Boolean>> response) {
+                DataJSON dataJSON = response.body();
+                if(response.isSuccessful()) {
+                    if(dataJSON!=null){
+                        if(dataJSON.isStatus() == true){
+                            List<Boolean> favStatus = dataJSON.getData();
+                            if(favStatus!=null){
+                                if(favStatus.get(0) == true){
+                                    Toast.makeText(comicActivity, "Xóa khỏi yêu thích thành công", Toast.LENGTH_SHORT).show();
+                                    if(listener!=null){
+                                        listener.onFavouriteStatus(false);
+                                        Log.e("fav remove result listener:","true");
+                                    }
+                                    Log.e("fav remove result:","true");
+                                }
+                            }
+                        }
+                        else{
+                            // do api trên server,nếu thành công remove thì sẽ trả ra status = true
+                            // còn ko thì false,và phần obj List sẽ ko có gì
+                            // thành công thì obj List sẽ cx trả ra thêm 1 List<boolean> là true nữa
+                            // thực ra là ko cần thiết,hơi thừa nhưng thêm vào cho chắc,nên nhìn nó mới hài hài như này
+                            Log.e("fav remove result:","false");
+                            Toast.makeText(comicActivity, "Xóa khỏi yêu thích thất bại", Toast.LENGTH_SHORT).show();
+                            listener.onFavouriteStatus(true);
+                            Log.e("fav remove result listener:","false");
+                        }
+                    }
                 }
-                Log.e("fav remove result:","true");
+                else if(response.code() == HttpURLConnection.HTTP_NOT_IMPLEMENTED){
+                    Log.e("Status favourites remove repository:", MessageStatusHTTP.notImplemented);
+                }
             }
-            else{
-                Log.e("fav remove result:","false");
-                Toast.makeText(requireContext(), "Xóa khỏi yêu thích thất bại", Toast.LENGTH_SHORT).show();
-                listener.onFavouriteStatus(true);
-                Log.e("fav remove result listener:","false");
+
+            @Override
+            public void onFailure(Call<DataJSON<Boolean>> call, Throwable t) {
+                Log.e("ERROR",this.getClass().getName()+" onFailure: "+t.getMessage());
+                Toast.makeText(comicActivity, "No internet connection!", Toast.LENGTH_SHORT).show();
             }
-            comicViewModel.removeFromFavourite(hashMap).removeObservers(this);
         });
+//        comicViewModel.removeFromFavourite(hashMap).observe(this,favourites -> {
+//            if(favourites.get(0) == true){
+//                Toast.makeText(requireContext(), "Xóa khỏi yêu thích thành công", Toast.LENGTH_SHORT).show();
+//                if(listener!=null){
+//                    listener.onFavouriteStatus(false);
+//                    Log.e("fav remove result listener:","true");
+//                }
+//                Log.e("fav remove result:","true");
+//            }
+//            else{
+//                Log.e("fav remove result:","false");
+//                Toast.makeText(requireContext(), "Xóa khỏi yêu thích thất bại", Toast.LENGTH_SHORT).show();
+//                listener.onFavouriteStatus(true);
+//                Log.e("fav remove result listener:","false");
+//            }
+////            comicViewModel.removeFromFavourite(hashMap).removeObservers(this);
+//        });
     }
 
     private void addToFavourite(String comicID,String favouriteID) {
@@ -135,22 +187,63 @@ public class BottomSheetAddtoFavComic extends BottomSheetDialogFragment {
         hashMap.put("comicID",comicID);
         hashMap.put("favouriteID",favouriteID);
         Log.e("comicID and favID",comicID + favouriteID);
-        comicViewModel.addToFavourite(hashMap).observe(this,favourites -> {
-            if(favourites.get(0) == true){
-                Log.e("fav add result:","true");
-                Toast.makeText(requireContext(), "Thêm vào yêu thích thành công", Toast.LENGTH_SHORT).show();
-                if(listener!=null){
-                    listener.onFavouriteStatus(true);
-                    Log.e("fav add listener result:","true");
+        ComicService.comicService.addToFavourite(hashMap).enqueue(new Callback<DataJSON<Boolean>>() {
+            @Override
+            public void onResponse(Call<DataJSON<Boolean>> call, Response<DataJSON<Boolean>> response) {
+                DataJSON dataJSON = response.body();
+                if(response.isSuccessful()) {
+                    if(dataJSON!=null){
+                        if(dataJSON.isStatus() == true){
+                            List<Boolean> favStatus = dataJSON.getData();
+                            if(favStatus!=null){
+                                if(favStatus.get(0) == true){
+                                    Log.e("fav add result:","true");
+                                    Toast.makeText(comicActivity, "Thêm vào yêu thích thành công", Toast.LENGTH_SHORT).show();
+                                    if(listener!=null){
+                                        listener.onFavouriteStatus(true);
+                                        Log.e("fav add listener result:","true");
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            // do api trên server,nếu thành công add thì sẽ trả ra status = true
+                            // còn ko thì false,và phần obj List sẽ ko có gì
+                            // thành công thì obj List sẽ cx trả ra thêm 1 List<boolean> là true nữa
+                            // thực ra là ko cần thiết,hơi thừa nhưng thêm vào cho chắc,nên nhìn nó mới hài hài như này
+                            Log.e("fav add result:","false");
+                            Toast.makeText(requireContext(), "Thêm vào yêu thích thất bại", Toast.LENGTH_SHORT).show();
+                            listener.onFavouriteStatus(false);
+                        }
+                    }
+                }
+                else if(response.code() == HttpURLConnection.HTTP_NOT_IMPLEMENTED){
+                    Log.e("Status favourites add repository:", MessageStatusHTTP.notImplemented);
                 }
             }
-            else{
-                Log.e("fav add result:","false");
-                Toast.makeText(requireContext(), "Thêm vào yêu thích thất bại", Toast.LENGTH_SHORT).show();
-                listener.onFavouriteStatus(false);
+
+            @Override
+            public void onFailure(Call<DataJSON<Boolean>> call, Throwable t) {
+                Log.e("ERROR",this.getClass().getName()+" onFailure: "+t.getMessage());
+                Toast.makeText(comicActivity, "No internet connection!", Toast.LENGTH_SHORT).show();
             }
-            comicViewModel.addToFavourite(hashMap).removeObservers(this);
         });
+//        comicViewModel.addToFavourite(hashMap).observe(this,favourites -> {
+//            if(favourites.get(0) == true){
+//                Log.e("fav add result:","true");
+//                Toast.makeText(requireContext(), "Thêm vào yêu thích thành công", Toast.LENGTH_SHORT).show();
+//                if(listener!=null){
+//                    listener.onFavouriteStatus(true);
+//                    Log.e("fav add listener result:","true");
+//                }
+//            }
+//            else{
+//                Log.e("fav add result:","false");
+//                Toast.makeText(requireContext(), "Thêm vào yêu thích thất bại", Toast.LENGTH_SHORT).show();
+//                listener.onFavouriteStatus(false);
+//            }
+////            comicViewModel.addToFavourite(hashMap).removeObservers(this);
+//        });
     }
 
     public static void setData(Boolean status){

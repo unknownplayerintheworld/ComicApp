@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -65,4 +66,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("jp.wasabeef:glide-transformations:4.3.0")
     implementation("androidx.palette:palette:1.0.0")
+    implementation("com.google.firebase:firebase-storage:20.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
 }
