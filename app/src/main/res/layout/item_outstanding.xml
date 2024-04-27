@@ -17,7 +17,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="75dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/raiden"
+            android:src="@drawable/error_image"
             android:scaleType="centerCrop"
             android:id="@+id/img_left_outstanding"
             android:layout_height="match_parent">
@@ -27,14 +27,14 @@
             app:layout_constraintStart_toEndOf="@+id/img_left_outstanding"
             android:layout_height="match_parent"
             android:id="@+id/img_outstanding"
-            android:src="@drawable/img_4"
+            android:src="@drawable/error_image"
             android:scaleType="centerCrop"></com.google.android.material.imageview.ShapeableImageView>
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="85dp"
             app:layout_constraintStart_toEndOf="@+id/img_outstanding"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/img_right_outstanding"
-            android:src="@drawable/raiden"
+            android:src="@drawable/error_image"
             android:scaleType="centerCrop"
             android:layout_height="match_parent">
         </com.google.android.material.imageview.ShapeableImageView>

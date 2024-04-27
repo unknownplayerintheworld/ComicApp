@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -26,6 +27,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -66,6 +71,7 @@ public class ReadingActivity extends AppCompatActivity {
     private RecyclerView rcv_image_chapter,rcv_bottom_sheet_chapter;
     private AppBarLayout scroll_header,scroll_bottom;
     private ProgressBar loading;
+    private Boolean image_status_flag = false;
     private int currentChapterPosition;
     private int lastChapter,firstChapter;
     private TextView txt_norecord;
@@ -81,12 +87,42 @@ public class ReadingActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "MyPrefs";
     private static final String LAST_UPDATE_TIME_KEY = "lastUpdateTime";
+    private InterstitialAd mInterstitialAd;
+    private static final String TAG = "ReadingActivity";
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading);
+
+
+        // load AD
+        AdRequest adRequest = new AdRequest.Builder().build();
+        String adUnitId = getString(R.string.interstitial_ad_unit_id);
+
+        InterstitialAd.load(this, adUnitId, adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i(TAG, "onAdLoaded");
+                        if(mInterstitialAd != null){
+                            mInterstitialAd.show(ReadingActivity.this);
+                        }
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.d(TAG, loadAdError.toString());
+                        mInterstitialAd = null;
+                    }
+                });
+
+
         //txtnorecord
         txt_norecord = findViewById(R.id.txt_noimage);
         //
@@ -178,7 +214,7 @@ public class ReadingActivity extends AppCompatActivity {
         long timeSinceLastUpdate = currentTime - lastUpdateTime;
         long updateInterval = 15 * 60 * 1000; // 15 phút * 60 giây/phút * 1000 ms/giây
 
-        if (timeSinceLastUpdate >= updateInterval) {
+        if (timeSinceLastUpdate >= updateInterval && image_status_flag == true) {
             // Thực hiện cập nhật trạng thái
             updateViews(comicID);
 
@@ -188,7 +224,8 @@ public class ReadingActivity extends AppCompatActivity {
             editor.apply();
         } else {
             // Thời gian giữa các lần cập nhật chưa đủ lớn, từ chối cập nhật
-            Toast.makeText(this, "Please wait before updating again", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Please wait before updating again", Toast.LENGTH_SHORT).show();
+            Log.e("status update view","Pls wait before updating again");
         }
     }
 
@@ -385,7 +422,7 @@ public class ReadingActivity extends AppCompatActivity {
             chapter.setComicIDfk(Integer.parseInt(comicID));
             imageChapterViewModel.getAllImage(chapter).observe(this,imageChapters -> {
                 if(imageChapters.isEmpty()){
-
+                    image_status_flag = false;
                 }
                 else {
                     for (int i = 0; i < imageChapters.size(); i++) {
@@ -393,6 +430,7 @@ public class ReadingActivity extends AppCompatActivity {
 
                         }
                         else {
+                            image_status_flag = true;
                             imageChapterList.add(new ImageChapter(imageChapters.get(i).getId(), imageChapters.get(i).getLinkImage(), imageChapters.get(i).getImage_pos()));
                             Log.e("Status:", String.valueOf(i));
                         }

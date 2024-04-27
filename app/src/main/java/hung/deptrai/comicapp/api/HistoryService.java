@@ -16,7 +16,7 @@ import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 
 public interface HistoryService {
-    HistoryService historyService = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/history/")
+    HistoryService historyService = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/history/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(HistoryService.class);

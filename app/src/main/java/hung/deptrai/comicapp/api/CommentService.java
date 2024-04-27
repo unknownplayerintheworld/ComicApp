@@ -14,7 +14,7 @@ import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 
 public interface CommentService {
-    CommentService commentService = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/comment/")
+    CommentService commentService = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/comment/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CommentService.class);

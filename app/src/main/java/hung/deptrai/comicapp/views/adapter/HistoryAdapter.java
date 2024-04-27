@@ -22,6 +22,7 @@ import hung.deptrai.comicapp.model.Author;
 import hung.deptrai.comicapp.model.Chapter;
 import hung.deptrai.comicapp.model.Comic;
 import hung.deptrai.comicapp.model.History;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
 import hung.deptrai.comicapp.views.Interface.IClickHistory;
 
@@ -54,6 +55,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         Chapter chapter = listChapter.get(position);
         Author author = listAuthor.get(position);
             Glide.with(holder.img).load(comic.getLinkPicture()).into(holder.img);
+            ImageLoader.loadImage2(holder.img,comic.getLinkPicture(),holder.img);
             holder.comicname.setText(comic.getComicName());
             holder.current_reading_chapter.setText("Chapter "+String.valueOf(chapter.getChapter_pos()));
             holder.author_name.setText(author.getAuthor_name());

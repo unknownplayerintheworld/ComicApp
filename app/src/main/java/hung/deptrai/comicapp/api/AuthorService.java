@@ -12,7 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface AuthorService {
-    AuthorService authorservice = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/trans/")
+    AuthorService authorservice = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/trans/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthorService.class);

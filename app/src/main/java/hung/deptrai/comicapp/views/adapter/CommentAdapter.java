@@ -89,21 +89,23 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.likebtn.setImageResource(R.drawable.ic_like);
         holder.dislikebtn.setImageResource(R.drawable.ic_dislike);
         if(commentID != null && accountID != null && lod != null) {
-            for (int i = 0; i < commentID.size(); i++) {
-                Log.e("comment|commentID",String.valueOf(comment.getCommentID())+"|"+String.valueOf(commentID.get(i)));
-                if (comment.getCommentID() == commentID.get(i)) {
-                    Log.e("status","true");
-                    if (accountID.get(i) == Integer.parseInt(Tmp.account_id)) {
-                        if (lod.get(i) == true) {
-//                            holder.like_count.setText(":)");
-                            status = true;
-                            holder.likebtn.setImageResource(R.drawable.ic_liked);
-                       } else {
-                            status = true;
-//                            holder.dislike_count.setText(":(");
-                            holder.dislikebtn.setImageResource(R.drawable.ic_disliked);
-                       }
-                        break;
+            if(commentID.size() == accountID.size() && accountID.size() == lod.size()) {
+                for (int i = 0; i < commentID.size(); i++) {
+                    Log.e("comment|commentID", String.valueOf(comment.getCommentID()) + "|" + String.valueOf(commentID.get(i)));
+                    if (comment.getCommentID() == commentID.get(i)) {
+                        Log.e("status", "true");
+                        if (accountID.get(i) == Integer.parseInt(Tmp.account_id)) {
+                            if (lod.get(i) == true) {
+                                //                            holder.like_count.setText(":)");
+                                status = true;
+                                holder.likebtn.setImageResource(R.drawable.ic_liked);
+                            } else {
+                                status = true;
+                                //                            holder.dislike_count.setText(":(");
+                                holder.dislikebtn.setImageResource(R.drawable.ic_disliked);
+                            }
+                            break;
+                        }
                     }
                 }
             }

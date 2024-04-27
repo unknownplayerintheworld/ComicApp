@@ -1,5 +1,6 @@
 package hung.deptrai.comicapp.views;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,11 +37,20 @@ public class ListChapterActivity extends AppCompatActivity {
     private List<Comic> listcomic;
     private ChapterViewModel chapterViewModel;
     private List<Chapter> chapterList,chapterHistory;
+    private static final String TAG = "ListChapterActivity";
+    private AdView mAdView;
     private ListChapterAdapter adapter;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_listchapter);
+
+        //Ads
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         initListComicForTesting();
         rcv = findViewById(R.id.rcv_chapter_list);
         back_btn = findViewById(R.id.btn_back_chapter);

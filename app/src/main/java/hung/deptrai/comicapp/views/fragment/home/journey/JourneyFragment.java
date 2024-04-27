@@ -237,11 +237,11 @@ public class JourneyFragment extends Fragment {
                 });
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        updateUI();
-    }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        updateUI();
+//    }
     //    private void scrollToNextItem(RecyclerView.LayoutManager layoutManager,) {
 //        int currentItem = layoutManager.findFirstVisibleItemPosition();
 //        int nextItem = currentItem + 1;
@@ -275,15 +275,15 @@ public class JourneyFragment extends Fragment {
 //        list.add(new Photo(R.drawable.banner));
 //        return list;
 //    }
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        hand.removeCallbacks(run);
-//    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        updateUI();
+    }
 //
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        hand.postDelayed(run,2000);
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
 }

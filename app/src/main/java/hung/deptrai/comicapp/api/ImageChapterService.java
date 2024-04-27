@@ -10,7 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ImageChapterService {
-    ImageChapterService imageChapterService = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/")
+    ImageChapterService imageChapterService = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ImageChapterService.class);

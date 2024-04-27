@@ -16,6 +16,7 @@ import java.util.List;
 
 import hung.deptrai.comicapp.R;
 import hung.deptrai.comicapp.model.Comic;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
 
 public class ShounenAdapter extends RecyclerView.Adapter<ShounenAdapter.ShounenViewHolder>{
@@ -41,6 +42,7 @@ public class ShounenAdapter extends RecyclerView.Adapter<ShounenAdapter.ShounenV
         }
         else{
             Glide.with(holder.img_shounen).load(comic.getLinkPicture()).into(holder.img_shounen);
+            ImageLoader.loadImage2(holder.img_shounen,comic.getLinkPicture(),holder.img_shounen);
             holder.ComicName.setText(comic.getComicName());
             holder.shounen_layout.setOnClickListener(new View.OnClickListener() {
                 @Override

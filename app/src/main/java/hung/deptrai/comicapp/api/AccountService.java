@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 
 public interface AccountService {
     //comicapi-production.up.railway.app
-    AccountService accountService = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/Accounts/")
+    AccountService accountService = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/Accounts/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AccountService.class);

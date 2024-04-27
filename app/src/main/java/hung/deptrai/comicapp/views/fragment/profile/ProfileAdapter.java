@@ -19,6 +19,7 @@ import hung.deptrai.comicapp.R;
 import hung.deptrai.comicapp.model.Chapter;
 import hung.deptrai.comicapp.model.Comic;
 import hung.deptrai.comicapp.model.History;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
 import hung.deptrai.comicapp.views.Interface.IClickHistory;
 
@@ -55,6 +56,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         else{
             holder.tvHistoryTitle.setText(history.getComicName());
             Glide.with(holder.imgHistory).load(history.getLinkPicture()).into(holder.imgHistory);
+            ImageLoader.loadImage2(holder.imgHistory,history.getLinkPicture(),holder.imgHistory);
             holder.itemHistory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

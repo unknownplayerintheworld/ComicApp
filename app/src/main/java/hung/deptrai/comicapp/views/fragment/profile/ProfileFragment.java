@@ -59,6 +59,7 @@ import hung.deptrai.comicapp.model.Chapter;
 import hung.deptrai.comicapp.model.Comic;
 import hung.deptrai.comicapp.model.DataJSON;
 import hung.deptrai.comicapp.model.History;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.viewmodel.ChapterViewModel;
 import hung.deptrai.comicapp.viewmodel.ComicViewModel;
 import hung.deptrai.comicapp.viewmodel.SignUpViewModel;
@@ -257,6 +258,7 @@ public class ProfileFragment extends Fragment {
                         if(dataJSON.isStatus()){
                             List<Account> accounts = dataJSON.getData();
                             Glide.with(imgAccount).load(accounts.get(0).getAvatarAccount()).into(imgAccount);
+                            ImageLoader.loadImage2(imgAccount,accounts.get(0).getAvatarAccount(),imgAccount);
                         }
                         else{
 

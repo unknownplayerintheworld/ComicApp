@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
 public interface CategoryService {
-    CategoryService categoryService = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/")
+    CategoryService categoryService = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CategoryService.class);

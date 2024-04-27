@@ -1,5 +1,6 @@
 package hung.deptrai.comicapp.views.fragment.home.journey.Proposal;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import hung.deptrai.comicapp.R;
 import hung.deptrai.comicapp.model.Comic;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
 
 public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.ProposalViewHolder>{
@@ -41,7 +43,10 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
             return ;
         }
         Glide.with(holder.itemView).load(comic.getLinkPicture()).into(holder.img);
+        ImageLoader.loadImage2(holder.itemView,comic.getLinkPicture(),holder.img);
         holder.tv.setText(comic.getComicName());
+        holder.tv.setMaxLines(1);
+        holder.tv.setEllipsize(TextUtils.TruncateAt.END);
         holder.linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

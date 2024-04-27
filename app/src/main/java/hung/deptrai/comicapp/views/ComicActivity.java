@@ -38,7 +38,9 @@ import hung.deptrai.comicapp.model.Chapter;
 import hung.deptrai.comicapp.model.Comic;
 import hung.deptrai.comicapp.model.Comment;
 import hung.deptrai.comicapp.model.Favourite;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.viewmodel.AuthorViewModel;
+import hung.deptrai.comicapp.viewmodel.ChapterViewModel;
 import hung.deptrai.comicapp.viewmodel.ComicViewModel;
 import hung.deptrai.comicapp.viewmodel.CommentViewModel;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
@@ -57,6 +59,7 @@ public class ComicActivity extends AppCompatActivity implements iUpdateFavourite
     private ConstraintLayout item_header_author_comic;
     private AppCompatButton chapter_list_btn;
     private ShapeableImageView img_trans;
+    private ChapterViewModel chapterViewModel;
     private ImageButton back_btn,favourite_button,send_comment_btn;
     private TextView comic_name_txt,transName,txt_filter_comic;
     private TextView desc_comic_txt,views,txt_noRecord;
@@ -92,10 +95,12 @@ public class ComicActivity extends AppCompatActivity implements iUpdateFavourite
         comicViewModel = new ViewModelProvider(this).get(ComicViewModel.class);
         authorViewModel = new ViewModelProvider(this).get(AuthorViewModel.class);
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
+        chapterViewModel = new ViewModelProvider(this).get(ChapterViewModel.class);
 
         // transTeam
         img_trans = findViewById(R.id.author_header_comic);
         transName = findViewById(R.id.trans_title);
+//        comingsoon = findViewById(R.id.coming_soon);
 
         item_header_author_comic = findViewById(R.id.item_author_comic);
         favourite_button = findViewById(R.id.iconFavorite);
@@ -208,6 +213,7 @@ public class ComicActivity extends AppCompatActivity implements iUpdateFavourite
         });
         rcv.setLayoutManager(lnm);
         rcv.setAdapter(comicAdapter);
+//        getListChapter();
 
         //
         send_comment_btn.setOnClickListener(new View.OnClickListener() {
@@ -271,9 +277,25 @@ public class ComicActivity extends AppCompatActivity implements iUpdateFavourite
             desc_comic_txt.setText(comics.get(0).getDescription());
             views.setText(String.valueOf(comics.get(0).getViews()));
             Glide.with(this).load(comics.get(0).getLinkPicture()).into(img);
+            ImageLoader.loadImage2(img,comics.get(0).getLinkPicture(),img);
             comicViewModel.getComicByID(comic).removeObservers(this);
         });
     }
+//    public void getListChapter() {
+//        chapterList = new ArrayList<>();
+//        HashMap<String,String> hashMap = new HashMap<>();
+//        hashMap.put("comicID",getComicID());
+//        chapterViewModel.getChapterList(hashMap).observe(this,chapters -> {
+//            if(chapters.isEmpty()){
+//                chapter_list_btn.setVisibility(View.GONE);
+//                comingsoon.setVisibility(View.VISIBLE);
+//            }
+//            else{
+//                chapter_list_btn.setVisibility(View.VISIBLE);
+//                comingsoon.setVisibility(View.GONE);
+//            }
+//        });
+//    }
 
     public void getAllRootCommentInTheComic(){
         HashMap<String,String> hashmap = new HashMap<>();

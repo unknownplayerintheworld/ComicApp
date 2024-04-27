@@ -11,7 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ChapterService {
-    ChapterService chapterService = new Retrofit.Builder().baseUrl("http://192.168.0.109:8080/api/v1/comic/chapter/")
+    ChapterService chapterService = new Retrofit.Builder().baseUrl("https://comicapi-production.up.railway.app/api/v1/comic/chapter/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ChapterService.class);

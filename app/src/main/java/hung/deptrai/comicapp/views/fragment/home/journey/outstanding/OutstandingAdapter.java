@@ -28,6 +28,7 @@ import java.util.List;
 import hung.deptrai.comicapp.R;
 import hung.deptrai.comicapp.Transformation.BlurSidesTransformation;
 import hung.deptrai.comicapp.model.Comic;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -87,6 +88,7 @@ public class OutstandingAdapter extends RecyclerView.Adapter<OutstandingAdapter.
                     }
                 });
         Glide.with(holder.itemView.getContext()).load(out.getLinkPicture()).into(holder.imgOutstanding);
+        ImageLoader.loadImage2(holder.itemView,out.getLinkPicture(),holder.imgOutstanding);
         holder.item_outstanding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

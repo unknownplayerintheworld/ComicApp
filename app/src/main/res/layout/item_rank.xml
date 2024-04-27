@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
+    android:layout_marginEnd="10dp"
     app:cardElevation="4dp"
     android:outlineProvider="none">
     <RelativeLayout
@@ -27,7 +28,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:outlineProvider="none"
-                android:src="@drawable/ic_rank">
+                android:src="@drawable/ic_rank_gold">
             </ImageView>
             <TextView
                 android:id="@+id/positionRanktv"
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:padding="6dp"
             android:textSize="20sp"
-            android:maxLines="2"
+            android:maxLines="1"
             android:ellipsize="end"
             android:textStyle="bold"
             android:text="Truyện 1"></TextView>

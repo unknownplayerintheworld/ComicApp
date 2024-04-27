@@ -18,6 +18,7 @@ import java.util.List;
 
 import hung.deptrai.comicapp.R;
 import hung.deptrai.comicapp.model.Comic;
+import hung.deptrai.comicapp.service.ImageLoader;
 import hung.deptrai.comicapp.views.Interface.IClickComic;
 
 public class RankAdapter extends RecyclerView.Adapter<RankAdapter.RankViewHolder>{
@@ -45,15 +46,28 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.RankViewHolder
             return ;
         }
         int rank = position + 1;
-        setRankColor(holder.rankcolor, rank, context);
 
         // Thiết lập văn bản cho positionRanktv
         holder.positionRakingtv.setText(String.valueOf(rank));
 
         // Đặt ảnh vector và thiết lập colortint
-        holder.rankcolor.setImageResource(R.drawable.ic_rank);
+        switch (rank) {
+            case 1:
+                holder.rankcolor.setImageResource(R.drawable.ic_rank_gold);
+                break;
+            case 2:
+                holder.rankcolor.setImageResource(R.drawable.ic_rank_silver);
+                break;
+            case 3:
+                holder.rankcolor.setImageResource(R.drawable.ic_rank_bronze);
+                break;
+            default:
+                holder.rankcolor.setImageResource(R.drawable.ic_rank);
+                break;
+        }
         setVectorColorTint(holder.rankcolor, rank, context);
         Glide.with(holder.img).load(comic.getLinkPicture()).into(holder.img);
+        ImageLoader.loadImage2(holder.img,comic.getLinkPicture(),holder.img);
 //        holder.rankcolor.setImageResource(rank.getColor());
 //        holder.positionRakingtv.setText(String.valueOf(rank.getPosition()));
         holder.ComicName.setText(comic.getComicName());
@@ -65,25 +79,6 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.RankViewHolder
                 }
             }
         });
-    }
-    private void setRankColor(View view, int rank, Context context) {
-        int colorResId;
-        switch (rank) {
-            case 1:
-                colorResId = R.color.gold;
-                break;
-            case 2:
-                colorResId = R.color.silver;
-                break;
-            case 3:
-                colorResId = R.color.bronze;
-                break;
-            default:
-                colorResId = R.color.purple_82;
-                break;
-        }
-        int color = ContextCompat.getColor(context, colorResId);
-        view.setBackgroundColor(color);
     }
     private void setVectorColorTint(ImageView imageView, int rank, Context context) {
         int colorResId;

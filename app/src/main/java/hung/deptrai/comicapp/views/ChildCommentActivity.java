@@ -342,7 +342,7 @@ public class ChildCommentActivity extends AppCompatActivity {
                 else{
                     Log.e("update like","failed");
                 }
-                comment.setIslod(true);
+//                comment.setIslod(true);
                 checkAccountID(getChapterID());
                 checkCommentID(getChapterID());
                 checkLODType(getChapterID());
@@ -365,7 +365,7 @@ public class ChildCommentActivity extends AppCompatActivity {
                 else{
                     Log.e("update dislike","failed");
                 }
-                comment.setIslod(false);
+//                comment.setIslod(false);
                 checkAccountID(getChapterID());
                 checkCommentID(getChapterID());
                 checkLODType(getChapterID());

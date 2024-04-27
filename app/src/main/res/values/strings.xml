@@ -9,6 +9,8 @@
     <string name="wrongPassword">WrongPassword</string>
     
     <string name="updateAccountSuccessful">Update successful</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 
     <!--  menu title bottom navigation  -->
     <string name="home_menu_bottomnavigation">Home</string>
